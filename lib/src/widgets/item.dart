@@ -62,7 +62,7 @@ class _Flag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return country != null && showFlag!
+    return country != null && showFlag! && country!.flagUri != null
         ? Container(
             child: useEmoji!
                 ? Text(

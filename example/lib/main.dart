@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'Demo',
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       darkTheme: darkTheme,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -50,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onInputValidated: (bool value) {
                 print(value);
               },
+              ignoreFlagCodes: ["TW"],
               selectorConfig: SelectorConfig(
                 selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
                 useBottomSheetSafeArea: true,

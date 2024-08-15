@@ -193,7 +193,7 @@ class _Flag extends StatelessWidget {
                           package: 'intl_phone_number_input',
                         ),
                       )
-                    : CircleAvatar(),
+                    : SizedBox.shrink(),
           )
         : SizedBox.shrink();
   }
