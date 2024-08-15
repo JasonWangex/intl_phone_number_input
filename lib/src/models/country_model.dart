@@ -14,7 +14,7 @@ class Country {
   final String? dialCode;
 
   /// The flagUri which links to the flag for the [Country] in the library assets
-  final String flagUri;
+  String? flagUri;
 
   /// The nameTranslation for translation
   final Map<String, String>? nameTranslations;

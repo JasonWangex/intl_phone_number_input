@@ -40,7 +40,7 @@ void main() {
         expect(country.alpha2Code!.length, greaterThan(0));
         expect(country.alpha3Code!.length, greaterThan(0));
         expect(country.dialCode!.length, greaterThan(0));
-        expect(country.flagUri.length, greaterThan(0));
+        expect(country.flagUri?.length, greaterThan(0));
         expect(country.nameTranslations!.length,
             equals(expectedTranslations.length));
         expectedTranslations.forEach((language) =>

@@ -70,7 +70,7 @@ class _Flag extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineSmall,
                   )
                 : Image.asset(
-                    country!.flagUri,
+                    country!.flagUri!,
                     width: 32.0,
                     package: 'intl_phone_number_input',
                     errorBuilder: (context, error, stackTrace) {

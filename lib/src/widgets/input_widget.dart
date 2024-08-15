@@ -85,47 +85,49 @@ class InternationalPhoneNumberInput extends StatefulWidget {
   final Iterable<String>? autofillHints;
 
   final List<String>? countries;
+  final List<String> ignoreFlagCodes;
 
-  InternationalPhoneNumberInput(
-      {Key? key,
-      this.selectorConfig = const SelectorConfig(),
-      required this.onInputChanged,
-      this.onInputValidated,
-      this.onSubmit,
-      this.onFieldSubmitted,
-      this.validator,
-      this.onSaved,
-      this.fieldKey,
-      this.textFieldController,
-      this.keyboardAction,
-      this.keyboardType = TextInputType.phone,
-      this.initialValue,
-      this.hintText = 'Phone number',
-      this.errorMessage = 'Invalid phone number',
-      this.selectorButtonOnErrorPadding = 24,
-      this.spaceBetweenSelectorAndTextField = 12,
-      this.maxLength = 15,
-      this.isEnabled = true,
-      this.formatInput = true,
-      this.autoFocus = false,
-      this.autoFocusSearch = false,
-      this.autoValidateMode = AutovalidateMode.disabled,
-      this.ignoreBlank = false,
-      this.countrySelectorScrollControlled = true,
-      this.locale,
-      this.textStyle,
-      this.selectorTextStyle,
-      this.inputBorder,
-      this.inputDecoration,
-      this.searchBoxDecoration,
-      this.textAlign = TextAlign.start,
-      this.textAlignVertical = TextAlignVertical.center,
-      this.scrollPadding = const EdgeInsets.all(20.0),
-      this.focusNode,
-      this.cursorColor,
-      this.autofillHints,
-      this.countries})
-      : super(key: key);
+  InternationalPhoneNumberInput({
+    Key? key,
+    this.selectorConfig = const SelectorConfig(),
+    required this.onInputChanged,
+    this.onInputValidated,
+    this.onSubmit,
+    this.onFieldSubmitted,
+    this.validator,
+    this.onSaved,
+    this.fieldKey,
+    this.textFieldController,
+    this.keyboardAction,
+    this.keyboardType = TextInputType.phone,
+    this.initialValue,
+    this.hintText = 'Phone number',
+    this.errorMessage = 'Invalid phone number',
+    this.selectorButtonOnErrorPadding = 24,
+    this.spaceBetweenSelectorAndTextField = 12,
+    this.maxLength = 15,
+    this.isEnabled = true,
+    this.formatInput = true,
+    this.autoFocus = false,
+    this.autoFocusSearch = false,
+    this.autoValidateMode = AutovalidateMode.disabled,
+    this.ignoreBlank = false,
+    this.countrySelectorScrollControlled = true,
+    this.locale,
+    this.textStyle,
+    this.selectorTextStyle,
+    this.inputBorder,
+    this.inputDecoration,
+    this.searchBoxDecoration,
+    this.textAlign = TextAlign.start,
+    this.textAlignVertical = TextAlignVertical.center,
+    this.scrollPadding = const EdgeInsets.all(20.0),
+    this.focusNode,
+    this.cursorColor,
+    this.autofillHints,
+    this.countries,
+    this.ignoreFlagCodes = const <String>[],
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _InputWidgetState();
@@ -198,6 +200,12 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
     if (this.mounted) {
       List<Country> countries =
           CountryProvider.getCountriesData(countries: widget.countries);
+
+      for (var country in countries) {
+        if (widget.ignoreFlagCodes.contains(country.alpha2Code)) {
+          country.flagUri = null;
+        }
+      }
 
       Country country = previouslySelectedCountry ??
           Utils.getInitialSelectedCountry(
